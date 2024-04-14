@@ -1,0 +1,12 @@
+{
+  "name": "Test Extension",
+  "description": "This is a test extension",
+  "uuid": "org.test.extension.local",
+  "url": "https://gjs.guide/extensions",
+  "gettext-domain": "org.test.extension.local",
+  "settings-schema": "org.test.extension.local",
+  "shell-version": [
+    "45"
+  ],
+   "version": 1
+}
