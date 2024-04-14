@@ -7,7 +7,7 @@ import GLib from 'gi://GLib';
 import {ExtensionPreferences, gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 
-export default class ExamplePreferences extends ExtensionPreferences {
+export default class SSHPortForwardingPreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
         // Create a preferences page, with a single group
         const page = new Adw.PreferencesPage({

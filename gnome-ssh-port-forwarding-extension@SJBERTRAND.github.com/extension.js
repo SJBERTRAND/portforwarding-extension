@@ -1,5 +1,7 @@
 /* extension.js
  *
+ *https://github.com/SJBERTRAND/gnome-ssh-port-forwarding-extension
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
@@ -32,7 +34,7 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 const Indicator = GObject.registerClass(
 class Indicator extends PanelMenu.Button {
     _init(_settings) {
-        super._init(0.0, _('SSH Port Fowarding'));
+        super._init(0.0, _('SSH Port Forwarding Extension'));
         
         const _icon_on = 'network-transmit-receive-symbolic';
         const _icon_off = 'network-offline-symbolic';
@@ -55,7 +57,6 @@ class Indicator extends PanelMenu.Button {
         //Connect to the switch and active the connection when on and deactivate when off
         ConnectionSwitch.connect('toggled' , () =>{
             if (ConnectionSwitch.state == true){
-            log ("The switch is now on");
             // update the icon
             _icon.icon_name = _icon_on;
             
@@ -72,10 +73,8 @@ class Indicator extends PanelMenu.Button {
             this._Command = null;
             
             if( _settings.get_boolean('pass-required') ){
-            log("Pass required");
             this._Command = [ "/usr/bin/sshpass", "-p" , _settings.get_string('remote-password') , "ssh" ,"-N" ,"-L", _settings.get_string('host-port')+":"+_settings.get_string('host-address')+":"+_settings.get_string('remote-port') , _settings.get_string('remote-login')+"@"+_settings.get_string('remote-address') ];
             }else{
-            log("Pass not required");
             this._Command = [ "/usr/bin/ssh" ,"-N" ,"-L", _settings.get_string('host-port')+":"+_settings.get_string('host-address')+":"+_settings.get_string('remote-port') , _settings.get_string('remote-login')+"@"+_settings.get_string('remote-address') ];
             };
             
@@ -89,7 +88,6 @@ class Indicator extends PanelMenu.Button {
             }; // End of if statement if true
             
             if (ConnectionSwitch.state == false){
-            log ("The switch is now off");
             //update icon
             _icon.icon_name = _icon_off;
                     if ( this._SubProcess != null){
@@ -106,7 +104,7 @@ class Indicator extends PanelMenu.Button {
     }
 });
 
-export default class IndicatorExampleExtension extends Extension {
+export default class SSHPortForwardingExtension extends Extension {
     enable() {
         //Get the settings saved from the preferences
         this._settings = this.getSettings();

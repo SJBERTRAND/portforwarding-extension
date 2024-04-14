@@ -1,12 +1,12 @@
 {
-  "name": "Test Extension",
-  "description": "This is a test extension",
-  "uuid": "org.test.extension.local",
-  "url": "https://gjs.guide/extensions",
-  "gettext-domain": "org.test.extension.local",
-  "settings-schema": "org.test.extension.local",
+  "name": "Gnome SSH Port Forwarding Extension",
+  "description": "Extension to enable port forwarding via SSH ",
+  "uuid": "gnome-ssh-port-forwarding-extension@SJBERTRAND.github.com",
+  "url": "https://github.com/SJBERTRAND/gnome-ssh-port-forwarding-extension",
+  "gettext-domain": "gnome-ssh-port-forwarding-extension@SJBERTRAND.github.com",
+  "settings-schema": "org.gnome.shell.extensions.gnome-ssh-port-forwarding-extension@SJBERTRAND.github.com",
   "shell-version": [
-    "45"
+    "45","46"
   ],
    "version": 1
 }
