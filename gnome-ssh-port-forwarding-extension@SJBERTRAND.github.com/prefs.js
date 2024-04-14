@@ -1,7 +1,7 @@
 import Gio from 'gi://Gio';
 import Adw from 'gi://Adw';
-import Gtk from 'gi://Gtk';
-import Vte from 'gi://Vte';
+import Gtk from 'gi://Gtk?version=4.0';
+import Vte from 'gi://Vte?version=3.91';
 import GLib from 'gi://GLib';
 
 import {ExtensionPreferences, gettext as _} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';

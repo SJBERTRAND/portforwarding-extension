@@ -61,29 +61,26 @@ class Indicator extends PanelMenu.Button {
             _icon.icon_name = _icon_on;
             
             //Create a function to verify if the subprocess has succeded
-            function CheckFail(){
-                if (proc.get_successful() == false){
-                        ConnectionSwitch.setToggleState(false);
-                        _icon.icon_name = _icon_off;
-                        //Main.notify("Connection with "+_settings.get_string('connection-name')+" failed");
-                        };
+            function ProcCompleted(){
+                ConnectionSwitch.setToggleState(false);
+                _icon.icon_name = _icon_off;
                 };
                     
             //Create a subprocess to Call SSH based on if password is required
             this._Command = null;
             
             if( _settings.get_boolean('pass-required') ){
-            this._Command = [ "/usr/bin/sshpass", "-p" , _settings.get_string('remote-password') , "ssh" ,"-N" ,"-L", _settings.get_string('host-port')+":"+_settings.get_string('host-address')+":"+_settings.get_string('remote-port') , _settings.get_string('remote-login')+"@"+_settings.get_string('remote-address') ];
+            this._Command = [ "/usr/bin/sshpass", "-p" , _settings.get_string('remote-password') , "ssh" ,"-N" ,"-L",_settings.get_string('host-port')+":"+_settings.get_string('host-address')+":"+_settings.get_string('remote-port') , _settings.get_string('remote-login')+"@"+_settings.get_string('remote-address') ];
             }else{
-            this._Command = [ "/usr/bin/ssh" ,"-N" ,"-L", _settings.get_string('host-port')+":"+_settings.get_string('host-address')+":"+_settings.get_string('remote-port') , _settings.get_string('remote-login')+"@"+_settings.get_string('remote-address') ];
+            this._Command = [ "/usr/bin/ssh" ,"-N", "-o", "PasswordAuthentication=no","-L", _settings.get_string('host-port')+":"+_settings.get_string('host-address')+":"+_settings.get_string('remote-port') , _settings.get_string('remote-login')+"@"+_settings.get_string('remote-address') ];
             };
             
             
             // Attach the subprocess to the indicator with a new properties/value of _SubProcess 
             this._SubProcess = Gio.Subprocess.new(this._Command, Gio.SubprocessFlags.NONE); // When finish switch to STDOUT_SILENCE
-            const proc = this._SubProcess;
+            //const proc = this._SubProcess;
             const cancellable = new Gio.Cancellable();
-            this._SubProcess.wait_async(cancellable,CheckFail);
+            this._SubProcess.wait_async(cancellable,ProcCompleted);
 
             }; // End of if statement if true
             
