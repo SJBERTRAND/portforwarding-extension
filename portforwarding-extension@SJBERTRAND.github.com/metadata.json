@@ -1,0 +1,12 @@
+{
+  "name": "Port Forwarding Extension",
+  "description": "Extension to enable port forwarding via SSH ",
+  "uuid": "portforwarding-extension@SJBERTRAND.github.com",
+  "url": "https://github.com/SJBERTRAND/portforwarding-extension",
+  "gettext-domain": "portforwarding-extension@SJBERTRAND.github.com",
+  "settings-schema": "org.gnome.shell.extensions.portforwarding-extension@SJBERTRAND.github.com",
+  "shell-version": [
+    "45","46"
+  ],
+   "version": 1
+}
