@@ -1,29 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
-  <schema id="org.gnome.shell.extensions.portforwarding-extension@SJBERTRAND.github.com" path="/org/gnome/shell/extensions/portforwarding-extension@SJBERTRAND.github.com/">
-    <key name="host-port" type="s">
-      <default>"5901"</default>
+  <schema id="org.gnome.shell.extensions.portforwarding-extension@SJBERTRAND.github.com" path="/org/gnome/shell/extensions/portforwarding-extension@SJBERTRAND.github.com/">    
+    <key name="connection-active1" type="b">
+      <default>false</default>
     </key>
-    <key name="host-address" type="s">
-      <default>"localhost"</default>
+    <key name="server-name1" type="s">
+      <default>"Server1"</default>
     </key>
-    <key name="remote-port" type="s">
-      <default>"5901"</default>
-    </key>
-    <key name="remote-address" type="s">
+    <key name="server-address1" type="s">
       <default>""</default>
     </key>
-    <key name="remote-login" type="s">
+    <key name="server-port1" type="s">
       <default>""</default>
     </key>
-    <key name="remote-password" type="s">
+    <key name="host-port1" type="s">
       <default>""</default>
     </key>
-    <key name="connection-name" type="s">
-      <default>"Default"</default>
+    <key name="server-login1" type="s">
+      <default>""</default>
     </key>
-    <key name="pass-required" type="b">
-      <default>true</default>
+    <key name="password-required1" type="b">
+      <default>false</default>
+    </key>    
+    <key name="server-password1" type="s">
+      <default>""</default>
+    </key>
+    <key name="connection-active2" type="b">
+      <default>false</default>
+    </key>
+    <key name="server-name2" type="s">
+      <default>"Server2"</default>
+    </key>
+    <key name="server-address2" type="s">
+      <default>""</default>
+    </key>
+    <key name="server-port2" type="s">
+      <default>""</default>
+    </key>
+    <key name="host-port2" type="s">
+      <default>""</default>
+    </key>
+    <key name="server-login2" type="s">
+      <default>""</default>
+    </key>
+    <key name="password-required2" type="b">
+      <default>false</default>
+    </key>    
+    <key name="server-password2" type="s">
+      <default>""</default>
+    </key>  
+    <key name="connection-active3" type="b">
+      <default>false</default>
+    </key>
+    <key name="server-name3" type="s">
+      <default>"Server3"</default>
+    </key>
+    <key name="server-address3" type="s">
+      <default>""</default>
+    </key>
+    <key name="server-port3" type="s">
+      <default>""</default>
+    </key>
+    <key name="host-port3" type="s">
+      <default>""</default>
+    </key>
+    <key name="server-login3" type="s">
+      <default>""</default>
+    </key>
+    <key name="password-required3" type="b">
+      <default>false</default>
+    </key>    
+    <key name="server-password3" type="s">
+      <default>""</default>
+    </key>
+    <key name="connection-active4" type="b">
+      <default>false</default>
+    </key>
+    <key name="server-name4" type="s">
+      <default>"Server4"</default>
+    </key>
+    <key name="server-address4" type="s">
+      <default>""</default>
+    </key>
+    <key name="server-port4" type="s">
+      <default>""</default>
+    </key>
+    <key name="host-port4" type="s">
+      <default>""</default>
+    </key>
+    <key name="server-login4" type="s">
+      <default>""</default>
+    </key>
+    <key name="password-required4" type="b">
+      <default>false</default>
+    </key>    
+    <key name="server-password4" type="s">
+      <default>""</default>
+    </key>  
+    <key name="connection-active5" type="b">
+      <default>false</default>
+    </key>
+    <key name="server-name5" type="s">
+      <default>"Server5"</default>
+    </key>
+    <key name="server-address5" type="s">
+      <default>""</default>
+    </key>
+    <key name="server-port5" type="s">
+      <default>""</default>
+    </key>
+    <key name="host-port5" type="s">
+      <default>""</default>
+    </key>
+    <key name="server-login5" type="s">
+      <default>""</default>
+    </key>
+    <key name="password-required5" type="b">
+      <default>false</default>
+    </key>    
+    <key name="server-password5" type="s">
+      <default>""</default>
     </key>
   </schema>
 </schemalist>

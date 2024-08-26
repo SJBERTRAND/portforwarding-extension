@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.portforwarding-extension@SJBERTRAND.github.com" path="/org/gnome/shell/extensions/portforwarding-extension@SJBERTRAND.github.com/">
+    <key name="host-port" type="s">
+      <default>"5901"</default>
+    </key>
+    <key name="host-address" type="s">
+      <default>"localhost"</default>
+    </key>
+    <key name="remote-port" type="s">
+      <default>"5901"</default>
+    </key>
+    <key name="remote-address" type="s">
+      <default>""</default>
+    </key>
+    <key name="remote-login" type="s">
+      <default>""</default>
+    </key>
+    <key name="remote-password" type="s">
+      <default>""</default>
+    </key>
+    <key name="connection-name" type="s">
+      <default>"Default"</default>
+    </key>
+    <key name="pass-required" type="b">
+      <default>true</default>
+    </key>
+  </schema>
+</schemalist>
+
