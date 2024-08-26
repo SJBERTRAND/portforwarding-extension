@@ -46,7 +46,7 @@ const SSHServerConnection = class {
        _settings.connect('changed::connection-active'+_number, ()=> {
         
                 
-                if (_settings.get_boolean('connection-active1') || _settings.get_boolean('connection-active2') || _settings.get_boolean('connection-active3') || _settings.get_boolean('connection-active4') ){
+                if (_settings.get_boolean('connection-active1') || _settings.get_boolean('connection-active2') || _settings.get_boolean('connection-active3') || _settings.get_boolean('connection-active4') || _settings.get_boolean('connection-active5') ){
                     _icon.icon_name = 'network-transmit-receive-symbolic';
                 }else{
                     _icon.icon_name = 'network-offline-symbolic';
@@ -79,21 +79,21 @@ const SSHServerConnection = class {
                 const _command = this._buildCommand(_settings,_number);
                 
                 // Assign Gio.Subprocess to the _subprocess of the switch
-                _subprocess = Gio.Subprocess.new(_command, Gio.SubprocessFlags.STDOUT_SILENCE);
+                _subprocess = Gio.Subprocess.new(_command, Gio.SubprocessFlags.NONE);
+                               
+                //  Connect the switch to the subprocess
+                _subprocess._switch = _switch;
                 
-                // Create a subprocess status value with a default of 0
-                _subprocess.status = 0;
+                // Connect the settings to the subprocess
+                _subprocess._settings =  _settings;
                 
-                // Connect to the value status and monitor if to changes to 1 and when it does change the switch
-                _subprocess.connect('notify::status', () => {
-                    if ( _subprocess.status == 1 ){
-                        _switch.setToggleState(false)
-                    };
-                });
-                            
+                // Connec the number to subprocess
+                
+                _subprocess._number = _number;
+ 
                 // Initialized the SSH connection and call _subprocessCompleted when it fails or get terminated
                 _subprocess.wait_async(_cancellable,this._subprocessCompleted);
-                
+    
                 // Change the value to change the icon
                 _settings.set_boolean('connection-active'+_number, true);
                 
@@ -122,9 +122,9 @@ const SSHServerConnection = class {
     
     const CommandArray = [];
         if (_settings.get_boolean('password-required'+_number) == true) {
-            CommandArray.push("sshpass", "-p", _settings.get_string('server-password'+_number), "ssh" ,"-N");
+            CommandArray.push("sshpass", "-p", _settings.get_string('server-password'+_number), "ssh" ,"-N" , "-o" , "BatchMode=true", "-o", "ConnectTimeout=2");
         }else{
-            CommandArray.push("ssh" ,"-N", "-o", "PasswordAuthentication=no");
+            CommandArray.push("ssh" ,"-N", "-o", "PasswordAuthentication=no" , "-o" , "BatchMode=true", "-o", "ConnectTimeout=2");
         };
 
         // Create an array of all the ports
@@ -150,7 +150,8 @@ const SSHServerConnection = class {
 
 
     _subprocessCompleted(_subprocess, _result){
-        _subprocess.status = 1;
+        _subprocess._switch.setToggleState(false);
+        _subprocess._settings.set_boolean('connection-active'+_subprocess._number, false)
         if ( _subprocess != null ) {
             _subprocess.force_exit();
             _subprocess = null;

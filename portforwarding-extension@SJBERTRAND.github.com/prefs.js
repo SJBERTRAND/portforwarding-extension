@@ -84,7 +84,7 @@ function CreateConnection(window,number){
 export default class SSHPortForwardingPreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
     
-    
+     window.default_height = 650;
      window.set_resizable(false);        
         // Import settings
         window._settings = this.getSettings();
