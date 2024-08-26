@@ -63,7 +63,7 @@ function CreateConnection(window,number){
         
         // Create password row
         const PasswordRow = new Adw.PasswordEntryRow({
-            title: _('Enter remote server password '),
+            title: _('Enter remote server password - sshpass required'),
         });
         group.add(PasswordRow);
     

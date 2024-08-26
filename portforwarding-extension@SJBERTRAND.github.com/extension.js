@@ -122,7 +122,7 @@ const SSHServerConnection = class {
     
     const CommandArray = [];
         if (_settings.get_boolean('password-required'+_number) == true) {
-            CommandArray.push("sshpass", "-p", _settings.get_string('server-password'+_number), "ssh" ,"-N" , "-o" , "BatchMode=true", "-o", "ConnectTimeout=2");
+            CommandArray.push("sshpass", "-p", _settings.get_string('server-password'+_number), "ssh" ,"-N" , "-o", "ConnectTimeout=2");
         }else{
             CommandArray.push("ssh" ,"-N", "-o", "PasswordAuthentication=no" , "-o" , "BatchMode=true", "-o", "ConnectTimeout=2");
         };
