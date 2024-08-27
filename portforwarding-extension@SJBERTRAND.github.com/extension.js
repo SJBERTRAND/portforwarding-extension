@@ -28,6 +28,7 @@ import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
 
 
 
@@ -151,7 +152,12 @@ const SSHServerConnection = class {
 
     _subprocessCompleted(_subprocess, _result){
         _subprocess._switch.setToggleState(false);
-        _subprocess._settings.set_boolean('connection-active'+_subprocess._number, false)
+        _subprocess._settings.set_boolean('connection-active'+_subprocess._number, false);
+
+        if ( _subprocess.get_exit_status() != 1 ){
+            Main.notify( 'Port Forwarding Extension - Unable to establish SSH connection' ,'Check '+_subprocess._settings.get_string('server-name'+_subprocess._number)+' settings' );
+        };
+
         if ( _subprocess != null ) {
             _subprocess.force_exit();
             _subprocess = null;
