@@ -123,7 +123,7 @@ const SSHServerConnection = class {
     
     const CommandArray = [];
         if (_settings.get_boolean('password-required'+_number) == true) {
-            CommandArray.push('sshpass', '-p', "'"+_settings.get_string('server-password'+_number)+"'", 'ssh' ,'-N' , '-o', 'ConnectTimeout=10');
+            CommandArray.push('sshpass', '-p', _settings.get_string('server-password'+_number), 'ssh' ,'-N' , '-o', 'ConnectTimeout=10');
         }else{
             CommandArray.push('ssh' ,'-N', '-o', 'PasswordAuthentication=no' , '-o' , 'BatchMode=true', '-o', 'ConnectTimeout=10');
         };
@@ -145,8 +145,6 @@ const SSHServerConnection = class {
         });
 
         CommandArray.push( _settings.get_string('server-login'+_number)+'@'+_settings.get_string('server-address'+_number));
-        
-        //Temp
         
         return CommandArray
     }; //End of build command
