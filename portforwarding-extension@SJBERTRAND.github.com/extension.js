@@ -123,9 +123,9 @@ const SSHServerConnection = class {
     
     const CommandArray = [];
         if (_settings.get_boolean('password-required'+_number) == true) {
-            CommandArray.push("sshpass", "-p", _settings.get_string('server-password'+_number), "ssh" ,"-N" , "-o", "ConnectTimeout=2");
+            CommandArray.push('sshpass', '-p', "'"+_settings.get_string('server-password'+_number)+"'", 'ssh' ,'-N' , '-o', 'ConnectTimeout=10');
         }else{
-            CommandArray.push("ssh" ,"-N", "-o", "PasswordAuthentication=no" , "-o" , "BatchMode=true", "-o", "ConnectTimeout=2");
+            CommandArray.push('ssh' ,'-N', '-o', 'PasswordAuthentication=no' , '-o' , 'BatchMode=true', '-o', 'ConnectTimeout=10');
         };
 
         // Create an array of all the ports
@@ -138,14 +138,16 @@ const SSHServerConnection = class {
             var Position = RemotePorts.indexOf(ports);
             //Look that there is a second port otherwise use the first one
                 if ( HostPorts.at(Position) == undefined ) {
-                    CommandArray.push("-L", ports+":"+_settings.get_string('server-address'+_number)+":"+ports );
+                    CommandArray.push('-L', ports+':'+_settings.get_string('server-address'+_number)+':'+ports );
                 }else {
-                    CommandArray.push("-L", HostPorts.at(Position)+":"+_settings.get_string('server-address'+_number)+":"+ports );
+                    CommandArray.push('-L', HostPorts.at(Position)+':'+_settings.get_string('server-address'+_number)+':'+ports );
                 };
         });
 
-        CommandArray.push( _settings.get_string('server-login'+_number)+"@"+_settings.get_string('server-address'+_number));
-
+        CommandArray.push( _settings.get_string('server-login'+_number)+'@'+_settings.get_string('server-address'+_number));
+        
+        //Temp
+        
         return CommandArray
     }; //End of build command
 
