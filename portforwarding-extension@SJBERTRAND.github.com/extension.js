@@ -28,7 +28,6 @@ import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
-import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
 
 
 
@@ -176,7 +175,6 @@ class Indicator extends PanelMenu.Button {
         super._init(0.0, _('SSH Port Forwarding Extension'));
         
         this._settings = _settings;
-        //this._sshForwarding = _sshForwarding; // Not sure if I should keep that one
         
         
         this._icon = new St.Icon({
@@ -202,7 +200,7 @@ export default class SSHPortForwardingExtension extends Extension {
         //Get the settings saved from the preferences
         this._settings = this.getSettings();
         this._sshForwarding = new SSHServerConnection(this._cancellable);
-        this._indicator = new Indicator(this._settings, this._sshForwarding);
+        this._indicator = new Indicator(this._settings,this._sshForwarding);
         Main.panel.addToStatusArea(this.uuid, this._indicator);
         
         // Add a menu item to open the preferences window
