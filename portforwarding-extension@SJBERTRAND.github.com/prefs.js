@@ -66,6 +66,12 @@ function CreateConnection(window,number){
             title: _('Enter remote server password - sshpass required'),
         });
         group.add(PasswordRow);
+        
+        //Create a show connectio switch
+        const ConnectionSwitch = new Adw.SwitchRow({
+            title: _('Show Connection in Indicator'),
+        });
+        group.add(ConnectionSwitch);
     
         
         // Add the settings for the page here
@@ -77,6 +83,7 @@ function CreateConnection(window,number){
         window._settings.bind('server-login'+number, RemoteUserNameRow, 'text', Gio.SettingsBindFlags.DEFAULT);
         window._settings.bind('password-required'+number, PasswordSwitch, 'active', Gio.SettingsBindFlags.DEFAULT);
         window._settings.bind('server-password'+number, PasswordRow, 'text', Gio.SettingsBindFlags.DEFAULT);
+        window._settings.bind('show-connection'+number, ConnectionSwitch, 'active', Gio.SettingsBindFlags.DEFAULT);
 };
 //End of function
 

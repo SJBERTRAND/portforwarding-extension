@@ -121,6 +121,21 @@
     <key name="server-password5" type="s">
       <default>''</default>
     </key>
+    <key name="show-connection1" type="b">
+      <default>true</default>
+    </key>
+    <key name="show-connection2" type="b">
+      <default>false</default>
+    </key>   
+    <key name="show-connection3" type="b">
+      <default>false</default>
+    </key>   
+    <key name="show-connection4" type="b">
+      <default>false</default>
+    </key>   
+    <key name="show-connection5" type="b">
+      <default>false</default>
+    </key>   
   </schema>
 </schemalist>
 

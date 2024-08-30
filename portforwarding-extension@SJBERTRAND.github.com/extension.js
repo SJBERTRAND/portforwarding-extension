@@ -36,8 +36,7 @@ const SSHServerConnection = class {
 
     };
     
-    
-    _createSwitches(_settings,_menu,_number,_icon,_cancellable){
+    _createSwitches(_settings,_menu,_number,_icon,_cancellable,_section){
             
         //When switches are created set all server visible value to false
         _settings.set_boolean('connection-active'+_number, false);
@@ -54,8 +53,19 @@ const SSHServerConnection = class {
        });       
        
         const _switch = this._buildSwitch(_settings,_number,_cancellable);
-        _menu.addMenuItem(_switch,_number);
-              
+        _section.addMenuItem(_switch,_number);
+        //_menu.addMenuItem(_switch,_number);
+        
+        
+        // Signal to destroy the switch if turned off
+        
+        _settings.connect('changed::show-connection'+_number, ()=> {
+            if ( _settings.get_boolean('show-connection'+_number) == false ){
+                _switch.destroy();
+            };
+        }); //End of signal
+        
+        
     }; // end of Create switch
     
     
@@ -185,12 +195,58 @@ class Indicator extends PanelMenu.Button {
         
         this._cancellable = new Gio.Cancellable();
         
-        _sshForwarding._createSwitches(this._settings,this.menu,1,this._icon,this._cancellable);
-        _sshForwarding._createSwitches(this._settings,this.menu,2,this._icon,this._cancellable);
-        _sshForwarding._createSwitches(this._settings,this.menu,3,this._icon,this._cancellable);
-        _sshForwarding._createSwitches(this._settings,this.menu,4,this._icon,this._cancellable);
-        _sshForwarding._createSwitches(this._settings,this.menu,5,this._icon,this._cancellable);
-
+        
+        // Create a Section
+        const _section = new PopupMenu.PopupMenuSection();
+        this.menu.addMenuItem(_section);
+        
+        
+        if ( this._settings.get_boolean('show-connection1') == true ){
+            _sshForwarding._createSwitches(this._settings,this.menu,1,this._icon,this._cancellable,_section);
+        };
+        this._settings.connect('changed::show-connection1', ()=> {
+            if ( this._settings.get_boolean('show-connection1') == true ){
+        _sshForwarding._createSwitches(this._settings,this.menu,1,this._icon,this._cancellable,_section);
+            };
+        }); //End of signal
+            
+        if ( this._settings.get_boolean('show-connection2') == true ){
+            _sshForwarding._createSwitches(this._settings,this.menu,2,this._icon,this._cancellable,_section);
+            };
+        this._settings.connect('changed::show-connection2', ()=> {
+            if ( this._settings.get_boolean('show-connection2') == true ){
+        _sshForwarding._createSwitches(this._settings,this.menu,2,this._icon,this._cancellable,_section);
+            };
+        }); //End of signal
+        
+        
+        if ( this._settings.get_boolean('show-connection3') == true ){
+            _sshForwarding._createSwitches(this._settings,this.menu,3,this._icon,this._cancellable,_section);
+            };
+        this._settings.connect('changed::show-connection3', ()=> {
+            if ( this._settings.get_boolean('show-connection3') == true ){
+        _sshForwarding._createSwitches(this._settings,this.menu,3,this._icon,this._cancellable,_section);
+            };
+        }); //End of signal
+        
+        
+        if ( this._settings.get_boolean('show-connection4') == true ){
+            _sshForwarding._createSwitches(this._settings,this.menu,4,this._icon,this._cancellable,_section);
+            };
+        this._settings.connect('changed::show-connection4', ()=> {
+            if ( this._settings.get_boolean('show-connection4') == true ){
+        _sshForwarding._createSwitches(this._settings,this.menu,4,this._icon,this._cancellable,_section);
+            };
+        }); //End of signal
+         
+        if ( this._settings.get_boolean('show-connection5') == true ){
+                _sshForwarding._createSwitches(this._settings,this.menu,5,this._icon,this._cancellable,_section);
+            };
+        this._settings.connect('changed::show-connection5', ()=> {
+            if ( this._settings.get_boolean('show-connection5') == true ){
+                _sshForwarding._createSwitches(this._settings,this.menu,5,this._icon,this._cancellable,_section);
+            };
+        }); //End of signal
     }
 });
 
@@ -203,7 +259,7 @@ export default class SSHPortForwardingExtension extends Extension {
         this._indicator = new Indicator(this._settings,this._sshForwarding);
         Main.panel.addToStatusArea(this.uuid, this._indicator);
         
-        // Add a menu item to open the preferences window
+        //Add a menu item to open the preferences window
         this._indicator.menu.addAction(_('Connection Settings',6),
             () => this.openPreferences());    
     }
