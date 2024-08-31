@@ -181,6 +181,13 @@ const SSHServerConnection = class {
 
 const Indicator = GObject.registerClass(
 class Indicator extends PanelMenu.Button {
+
+    destroy(){
+        this._cancellable.cancel();
+        super.destroy();
+        };
+
+
     _init(_settings,_sshForwarding) {
         super._init(0.0, _('SSH Port Forwarding Extension'));
         
@@ -255,7 +262,7 @@ export default class SSHPortForwardingExtension extends Extension {
     enable() {
         //Get the settings saved from the preferences
         this._settings = this.getSettings();
-        this._sshForwarding = new SSHServerConnection(this._cancellable);
+        this._sshForwarding = new SSHServerConnection();
         this._indicator = new Indicator(this._settings,this._sshForwarding);
         Main.panel.addToStatusArea(this.uuid, this._indicator);
         
@@ -265,8 +272,7 @@ export default class SSHPortForwardingExtension extends Extension {
     }
 
     disable() {
-        // Cancel all subprocess
-        this._indicator._cancellable.cancel();        
+        // Cancel all subprocess      
         this._sshForwarding = null;
         this._indicator.destroy();
         this._indicator = null;
