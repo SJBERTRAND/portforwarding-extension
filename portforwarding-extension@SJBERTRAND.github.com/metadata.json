@@ -6,9 +6,10 @@
   "settings-schema": "org.gnome.shell.extensions.portforwarding-extension@SJBERTRAND.github.com",
   "shell-version": [
     "45",
-    "46"
+    "46",
+    "47"
   ],
   "url": "https://github.com/SJBERTRAND/portforwarding-extension",
   "uuid": "portforwarding-extension@SJBERTRAND.github.com",
-  "version": 3
+  "version": 4
 }
