@@ -30,9 +30,16 @@ function CreateConnection(window,number){
         });
         group.add(RemoteAddressRow);
         
+        // Create a new entry row for the ssh connecting port
+        
+        const SshPortRow = new Adw.EntryRow({
+            title: _('Enter remote server SSH port (Default 22)'),
+        });
+        group.add(SshPortRow);
+        
         //Create a row for remote port
         const RemotePortRow = new Adw.EntryRow({
-            title: _('Enter remote server port(s)'),
+            title: _('Enter remote server port(s) forwarding'),
         });
         group.add(RemotePortRow);
         
@@ -45,7 +52,7 @@ function CreateConnection(window,number){
         
         //Create a row for host port
         const HostPortRow = new Adw.EntryRow({
-            title: _('Enter host server port(s)'),
+            title: _('Enter host server port(s) forwarding'),
         });
         group.add(HostPortRow);
         
@@ -78,6 +85,7 @@ function CreateConnection(window,number){
         //window._settings.bind('server-visible'+number, ShowServerSwitch, 'active', Gio.SettingsBindFlags.DEFAULT);
         window._settings.bind('server-name'+number, ServerNameRow, 'text', Gio.SettingsBindFlags.DEFAULT);
         window._settings.bind('server-address'+number, RemoteAddressRow, 'text', Gio.SettingsBindFlags.DEFAULT);
+        window._settings.bind('ssh-port'+number, SshPortRow, 'text', Gio.SettingsBindFlags.DEFAULT);
         window._settings.bind('server-port'+number, RemotePortRow, 'text', Gio.SettingsBindFlags.DEFAULT);
         window._settings.bind('host-port'+number, HostPortRow, 'text', Gio.SettingsBindFlags.DEFAULT);
         window._settings.bind('server-login'+number, RemoteUserNameRow, 'text', Gio.SettingsBindFlags.DEFAULT);
@@ -91,7 +99,7 @@ function CreateConnection(window,number){
 export default class SSHPortForwardingPreferences extends ExtensionPreferences {
     fillPreferencesWindow(window) {
     
-     window.default_height = 650;
+     window.default_height = 750;
      window.set_resizable(false);        
         // Import settings
         window._settings = this.getSettings();

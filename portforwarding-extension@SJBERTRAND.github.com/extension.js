@@ -132,9 +132,9 @@ const SSHServerConnection = class {
     
     const CommandArray = [];
         if (_settings.get_boolean('password-required'+_number) == true) {
-            CommandArray.push('sshpass', '-p', _settings.get_string('server-password'+_number), 'ssh' ,'-N' , '-o', 'ConnectTimeout=10');
+            CommandArray.push('sshpass', '-p', _settings.get_string('server-password'+_number), 'ssh' , '-p' , _settings.get_string('ssh-port'+_number) ,'-N' , '-o', 'ConnectTimeout=10');
         }else{
-            CommandArray.push('ssh' ,'-N', '-o', 'PasswordAuthentication=no' , '-o' , 'BatchMode=true', '-o', 'ConnectTimeout=10');
+            CommandArray.push('ssh' , '-p' , _settings.get_string('ssh-port'+_number) ,'-N', '-o', 'PasswordAuthentication=no' , '-o' , 'BatchMode=true', '-o', 'ConnectTimeout=10');
         };
 
         // Create an array of all the ports
