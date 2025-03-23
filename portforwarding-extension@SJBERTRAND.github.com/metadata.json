@@ -7,9 +7,10 @@
   "shell-version": [
     "45",
     "46",
-    "47"
+    "47",
+    "48"
   ],
   "url": "https://github.com/SJBERTRAND/portforwarding-extension",
   "uuid": "portforwarding-extension@SJBERTRAND.github.com",
-  "version": 5
+  "version": 7
 }
