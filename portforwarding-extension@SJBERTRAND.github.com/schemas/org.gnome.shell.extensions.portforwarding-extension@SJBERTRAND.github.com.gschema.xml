@@ -13,6 +13,9 @@
     <key name="ssh-port1" type="s">
       <default>'22'</default>
     </key>
+    <key name="remote-forward-host1" type="s">
+      <default>''</default>
+    </key>
     <key name="server-port1" type="s">
       <default>''</default>
     </key>
@@ -39,6 +42,9 @@
     </key>
     <key name="ssh-port2" type="s">
       <default>'22'</default>
+    </key>
+    <key name="remote-forward-host2" type="s">
+      <default>''</default>
     </key>
     <key name="server-port2" type="s">
       <default>''</default>
@@ -67,6 +73,9 @@
     <key name="ssh-port3" type="s">
       <default>'22'</default>
     </key>
+    <key name="remote-forward-host3" type="s">
+      <default>''</default>
+    </key>
     <key name="server-port3" type="s">
       <default>''</default>
     </key>
@@ -94,6 +103,9 @@
     <key name="ssh-port4" type="s">
       <default>'22'</default>
     </key>
+    <key name="remote-forward-host4" type="s">
+      <default>''</default>
+    </key>
     <key name="server-port4" type="s">
       <default>''</default>
     </key>
@@ -120,6 +132,9 @@
     </key>
     <key name="ssh-port5" type="s">
       <default>'22'</default>
+    </key>
+    <key name="remote-forward-host5" type="s">
+      <default>''</default>
     </key>
     <key name="server-port5" type="s">
       <default>''</default>
