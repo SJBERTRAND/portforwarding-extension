@@ -33,8 +33,13 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 const SSHServerConnection = class {
     constructor() {
-
+        this._subprocesses = [];
     };
+
+    destroy() {
+        this._subprocesses.forEach(subprocess => subprocess.force_exit());
+        this._subprocesses.length = 0;
+    }
     
     _createSwitches(_settings,_menu,_number,_icon,_cancellable,_section){
             
@@ -90,6 +95,7 @@ const SSHServerConnection = class {
                 
                 // Assign Gio.Subprocess to the _subprocess of the switch
                 _subprocess = Gio.Subprocess.new(_command, Gio.SubprocessFlags.NONE);
+                this._subprocesses.push(_subprocess);
                                
                 //  Connect the switch to the subprocess
                 _subprocess._switch = _switch;
@@ -142,14 +148,15 @@ const SSHServerConnection = class {
         const RemotePorts = _settings.get_string('server-port'+_number).match(regex);
         const HostPorts = _settings.get_string('host-port'+_number).match(regex);
 
+        const RemoteServerAddress = _settings.get_string('remote-forward-host'+_number) || _settings.get_string('server-address'+_number);
         RemotePorts.forEach(ports => {
             // Find position of item in first array
             var Position = RemotePorts.indexOf(ports);
             //Look that there is a second port otherwise use the first one
                 if ( HostPorts.at(Position) == undefined ) {
-                    CommandArray.push('-L', ports+':'+_settings.get_string('server-address'+_number)+':'+ports );
+                    CommandArray.push('-L', ports+':'+RemoteServerAddress+':'+ports );
                 }else {
-                    CommandArray.push('-L', HostPorts.at(Position)+':'+_settings.get_string('server-address'+_number)+':'+ports );
+                    CommandArray.push('-L', HostPorts.at(Position)+':'+RemoteServerAddress+':'+ports );
                 };
         });
 
@@ -168,6 +175,10 @@ const SSHServerConnection = class {
         };
 
         if ( _subprocess != null ) {
+            const index = this._subprocesses.indexOf(_subprocess);
+            if (index > -1) {
+                this._subprocesses.splice(index, 1);
+            }
             _subprocess.force_exit();
             _subprocess = null;
         };       
@@ -273,6 +284,7 @@ export default class SSHPortForwardingExtension extends Extension {
 
     disable() {
         // Cancel all subprocess      
+        this._sshForwarding.destroy();
         this._sshForwarding = null;
         this._indicator.destroy();
         this._indicator = null;

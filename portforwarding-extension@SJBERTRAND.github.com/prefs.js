@@ -37,6 +37,12 @@ function CreateConnection(window,number){
         });
         group.add(SshPortRow);
         
+        //Create a row for remote host
+        const RemoteForwardHostRow = new Adw.EntryRow({
+            title: _('Enter remote server address/ip for forwarding (if different from remote server address/ip)'),
+        });
+        group.add(RemoteForwardHostRow);
+
         //Create a row for remote port
         const RemotePortRow = new Adw.EntryRow({
             title: _('Enter remote server port(s) forwarding'),
@@ -86,6 +92,7 @@ function CreateConnection(window,number){
         window._settings.bind('server-name'+number, ServerNameRow, 'text', Gio.SettingsBindFlags.DEFAULT);
         window._settings.bind('server-address'+number, RemoteAddressRow, 'text', Gio.SettingsBindFlags.DEFAULT);
         window._settings.bind('ssh-port'+number, SshPortRow, 'text', Gio.SettingsBindFlags.DEFAULT);
+        window._settings.bind('remote-forward-host'+number, RemoteForwardHostRow, 'text', Gio.SettingsBindFlags.DEFAULT);
         window._settings.bind('server-port'+number, RemotePortRow, 'text', Gio.SettingsBindFlags.DEFAULT);
         window._settings.bind('host-port'+number, HostPortRow, 'text', Gio.SettingsBindFlags.DEFAULT);
         window._settings.bind('server-login'+number, RemoteUserNameRow, 'text', Gio.SettingsBindFlags.DEFAULT);
